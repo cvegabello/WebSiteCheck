@@ -1,0 +1,9 @@
+/venv
+/__pycache__/*pyc
+/output
+*.ico
+/LOGS
+*.csv
+*.exe
+# Visual Studio code configuration
+.vscode
