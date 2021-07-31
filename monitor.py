@@ -5,6 +5,11 @@ import time
 from datetime import datetime
 from datetime import date
 
+# content
+sender = "do.not.reply@igt-noreply.com"
+receiver = "carlos.vegabello@igt.com"
+
+
 DELAY_TIMER = 8
 def get_status_website(webSitesInfoList):
     for info in webSitesInfoList:
@@ -16,7 +21,7 @@ def get_status_website(webSitesInfoList):
                 time.sleep(DELAY_TIMER)
                 writeLog("Exception: {}".format(e1.args))
                 try:
-                    emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132","do.not.reply@igt-noreply.com",info[1], info[2], info[3], [])
+                    emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", sender, info[1], info[2], info[3], [])
                 except Exception as e2:
                     print("Email could not to be sent. Exception: {}".format(e2.args))
                     time.sleep(DELAY_TIMER)
@@ -26,22 +31,12 @@ def get_status_website(webSitesInfoList):
                     print("{}. Response code: {}".format (info[2], r.status_code))
                     time.sleep(DELAY_TIMER)
                     writeLog("{}. Response code: {}".format (info[2], r.status_code))
-<<<<<<< HEAD
-                    # try:
-                    #     # emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", "do.not.reply@igt-noreply.com", 'carlos.vegabello@igt.com, naim.adams2@igt.com', "{}. Response code: {}".format (info[2], r.status_code), info[3], [])
-                    #     emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", "do.not.reply@igt-noreply.com", info[1], "{}. Response code: {}".format (info[2], r.status_code), info[3], [])
-                    # except Exception as e:
-                    #     print("Email could not to be sent. Exception: {}".format(e.args))
-                    #     writeLog("Email could not to be sent. Exception: {}".format(e.args)) 
-=======
                     try:
                         # emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", "do.not.reply@igt-noreply.com", 'carlos.vegabello@igt.com, naim.adams2@igt.com', "{}. Response code: {}".format (info[2], r.status_code), info[3], [])
-                        emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", "do.not.reply@igt-noreply.com", info[1], "{}. Response code: {}".format (info[2], r.status_code), info[3], [])
+                        emailFuctions.send_email_bodyHtml_externalHTMLFile("156.24.14.132", sender, info[1], "{}. Response code: {}".format (info[2], r.status_code), info[3], [])
                     except Exception as e:
                         print("Email could not to be sent. Exception: {}".format(e.args))
-                        time.sleep(DELAY_TIMER)
                         writeLog("Email could not to be sent. Exception: {}".format(e.args)) 
->>>>>>> f958cf13adf60ebab9e1f70e4f605129b472817d
                 else:
                     print("{} is UP. Response code: {}".format (info[0], r.status_code))
                     time.sleep(DELAY_TIMER)
@@ -62,7 +57,7 @@ def readCSV(pathFile):
         print("Something wrong opening the CSV file: {}".format(pathFile))
         time.sleep(DELAY_TIMER)
         writeLog("Something wrong opening the CSV file: {}. Exception:{}".format(pathFile, e.args))
-        emailFuctions.send_email_bodyText("156.24.14.132", "do.not.reply@igt-noreply.com", "carlos.vegabello@igt.com", "Something wrong opening the CSV file.", "Something wrong opening the CSV file: {}. Exception:{}".format(pathFile, e.args), [])
+        emailFuctions.send_email_bodyText("156.24.14.132", sender, receiver, "Something wrong opening the CSV file.", "Something wrong opening the CSV file: {}. Exception:{}".format(pathFile, e.args), [])
 
     return infoList
     
@@ -77,7 +72,7 @@ def writeLog(message):
             f.write("\n")
             f.close
     except Exception as e:
-        emailFuctions.send_email_bodyText("156.24.14.132", "do.not.reply@igt-noreply.com", "carlos.vegabello@igt.com", "Something wrong opening the LOG file of the Websites Monitoring.", "Something wrong opening the LOG file: {}. Exception:{}".format("./LOGS/log_{}.txt".format(date_now_dt), e.args), [])
+        emailFuctions.send_email_bodyText("156.24.14.132", sender, receiver, "Something wrong opening the LOG file of the Websites Monitoring.", "Something wrong opening the LOG file: {}. Exception:{}".format("./LOGS/log_{}.txt".format(date_now_dt), e.args), [])
 
     
 
